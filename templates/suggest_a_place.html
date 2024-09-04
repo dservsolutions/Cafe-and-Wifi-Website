@@ -2,8 +2,25 @@
 <h1>Suggest a Place</h1>
 
 <form action="">
-    <input type="text" name="location" placeholder="Enter a Location">
     <input type="text" name="name" placeholder="Name">
-    <input type="text" name="street" placeholder="Street">
+    <input type="text" name="url" placeholder="Map URL">
+    <input type="text" name="img_url" placeholder="IMG URL">
+    <input type="text" name="location" placeholder="Location">
+    <fieldset>
+        <legend>Please select the options available</legend>
+        <div>
+            <input type="checkbox" id="sockets">
+            <label for="sockets">Has Sockets</label>
+            <input type="checkbox" id="toilets">
+            <label for="toilets">Has Toilets</label>
+            <input type="checkbox" id="wifi">
+            <label for="wifi">Has Wifi</label>
+            <input type="checkbox" id="calls">
+            <label for="calls">Can take calls</label>
+        </div>
+    </fieldset>
+    <input type="text" placeholder="How many seats">
+    <input type="text" placeholder="Coffe Price">
+
     <button type="submit">Save</button>
 </form>
