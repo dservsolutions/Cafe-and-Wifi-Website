@@ -1,26 +1,44 @@
 {% include 'header.html' %}
 <h1>Suggest a Place</h1>
 
-<form action="">
+<form method="POST" action="{{ url_for('suggest') }}" >
     <input type="text" name="name" placeholder="Name">
-    <input type="text" name="url" placeholder="Map URL">
-    <input type="text" name="img_url" placeholder="IMG URL">
+    <input type="text" name="url" placeholder="URL Map">
+    <input type="text" name="img_url" placeholder="URL Img">
     <input type="text" name="location" placeholder="Location">
     <fieldset>
-        <legend>Please select the options available</legend>
+        <legend>Please select the following options</legend>
         <div>
-            <input type="checkbox" id="sockets">
-            <label for="sockets">Has Sockets</label>
-            <input type="checkbox" id="toilets">
-            <label for="toilets">Has Toilets</label>
-            <input type="checkbox" id="wifi">
-            <label for="wifi">Has Wifi</label>
-            <input type="checkbox" id="calls">
-            <label for="calls">Can take calls</label>
+            <select name="sockets" id="sockets" required>
+                <option value="">-- Has Sockets --
+                </option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <select name="toilets" id="toilets" required>
+                <option value="">-- Has Toilets --
+                </option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <select name="wifi" id="wifi" required>
+                <option value="">-- Has Wifi --
+                </option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <select name="calls" id="calls" required>
+                <option value="">-- Can make calls --
+                </option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
         </div>
     </fieldset>
     <input type="text" placeholder="How many seats">
     <input type="text" placeholder="Coffe Price">
-
-    <button type="submit">Save</button>
+    <button type="submit" >Save</button>
 </form>
