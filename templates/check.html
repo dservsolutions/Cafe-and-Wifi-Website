@@ -1,0 +1,9 @@
+{% include 'header.html' %}
+
+<div>
+    <h1>Please enter the name of the place:</h1>
+    <form method="POST" action="{{ url_for('check') }}">
+        <input type="text" name="name">
+        <button type="submit">Check</button>
+    </form>
+</div>

@@ -1,9 +1,11 @@
 import random
 from crypt import methods
+
 from flask import render_template, Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Boolean, result_tuple
+from sqlalchemy import Integer, String, Boolean, result_tuple, except_
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -35,6 +37,11 @@ class Cafe(db.Model):
 with app.app_context():
     db.create_all()
 
+def get_data():
+    while request.method == "POST":
+        data =  request.form
+        return data
+
 
 @app.route('/')
 def home():
@@ -50,29 +57,17 @@ def places_registered():
     result = query.scalars().all()
     return render_template('places_registered.html', places=result)
 
+@app.route('/check', methods=["POST", "GET"])
+def check():
+    data = get_data()
+    query = db.session.execute(db.select(Cafe).where(Cafe.name == data))
+    result=query.scalars().all()
+    print(result)
+    return render_template('check.html')
 
-@app.route('/suggest_a_place', methods=["POST", "GET"])
-def suggest():
-    if request.method == "POST":
-        data = request.form
-        print(data)
-        # print(f"Name: {data['name']}, Map URL: {data['url']}, Img URL: {data['img_url']},"
-        #       f" Location: {data['location']}, Sockets: {data['sockets']}")
-    else:
-        print("Error")
-    
-    return render_template('suggest_a_place.html')
-
-
-@app.route('/contact', methods=["POST", "GET"])
-def contact():
-    if request.method == "POST":
-        data = request.form
-        print(f"{data['name']}, {data['email']}")
-    else:
-        print("Error")
-    return render_template('contact_me.html')
-
+@app.route('/add', methods=["POST", "GET"])
+def add():
+    return render_template('check.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
