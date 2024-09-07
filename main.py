@@ -1,7 +1,7 @@
 import random
 from crypt import methods
 
-from flask import render_template, Flask, request
+from flask import render_template, Flask, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean, result_tuple, except_
@@ -13,11 +13,11 @@ app = Flask(__name__)
 class Base(DeclarativeBase):
     pass
 
-
+app.config['SECRET_KEY'] = "12345678"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///cafes.db"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
-
+                                                
 
 # CAFE Table Configuration
 class Cafe(db.Model):
@@ -37,11 +37,11 @@ class Cafe(db.Model):
 with app.app_context():
     db.create_all()
 
-def get_data():
-    while request.method == "POST":
-        data =  request.form
-        return data
-
+# def get_data():
+#     while request.method == "POST":
+#         data =  request.form
+#         return data
+#
 
 @app.route('/')
 def home():
@@ -53,17 +53,14 @@ def home():
 
 @app.route('/places')
 def places_registered():
-    query = db.session.execute(db.select(Cafe.location))
+    query = db.session.execute(db.select(Cafe.name))
     result = query.scalars().all()
     return render_template('places_registered.html', places=result)
 
-@app.route('/check', methods=["POST", "GET"])
+@app.route('/check')
 def check():
-    data = get_data()
-    query = db.session.execute(db.select(Cafe).where(Cafe.name == data))
-    result=query.scalars().all()
-    print(result)
-    return render_template('check.html')
+    return render_template("check.html")
+    
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
