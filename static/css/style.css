@@ -254,3 +254,29 @@ a {
     column-gap: 3.5rem;
   }
 }
+
+
+/*========HOME=======*/
+.home{
+  overflow: hidden;
+}
+
+.home__container{ 
+  display: flex;
+  height: 450px;
+  width: 550px;
+  margin-top: 150px;
+  margin-left: 200px;
+  border-radius: 10px;
+}
+
+.home__title{
+  color: black;
+  font-size: 3.5rem;
+}
+
+.button{
+  background-color: gray;
+  border-radius: 5px;
+  top: 20px;
+}
