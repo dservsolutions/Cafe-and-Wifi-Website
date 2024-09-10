@@ -72,11 +72,11 @@
 
       <!--==================== MAIN ====================-->
       <div class="all">
-          <div class="data_table">
+          <form action="{{ url_for('edit_places') }}" method="POST">
               <table class="table table-striped">
                   <thead>
                   <tr>
-                      <th scope="col">id</th>
+                      <th scope="col" id="id" >id</th>
                       <th scope="col">Name</th>
                       <th scope="col">Location</th>
                       <th scope="col">Coffe Price</th>
@@ -92,7 +92,7 @@
                       <td>{{ place.coffee_price }}</td>
                       <td>
                           <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                              <button class="btn btn-primary me-md-2" type="button">Edit</button>
+                              <button class="btn btn-primary me-md-2" type="submit">Edit</button>
                               <button class="btn btn-danger me-md-2" type="button">Delete</button>
                           </div>
                       </td>
@@ -100,7 +100,7 @@
                   {% endfor %}
             </tbody>
         </table>
-    </div>
+    </form>
 </div>
 
 <!--      Footer-->

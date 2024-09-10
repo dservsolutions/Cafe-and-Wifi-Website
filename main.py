@@ -1,7 +1,7 @@
 import random
 from crypt import methods
 
-from flask import render_template, Flask, request, flash
+from flask import render_template, Flask, request, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean, result_tuple, except_
@@ -45,10 +45,7 @@ with app.app_context():
 
 @app.route('/')
 def home():
-    query = db.session.execute(db.select(Cafe.name))
-    result = query.scalars().all()
-    random_cafe = random.choice(result)
-    return render_template('index.html', cafe=random_cafe)
+    return render_template('index.html')
 
 
 @app.route('/places')
@@ -57,6 +54,12 @@ def view_all():
     result = query.scalars().all()
     return render_template('all_places.html', places=result)
 
+@app.route('/edit/', methods=["POST", "GET"])
+def edit_places():
+    if request.method == 'POST':
+        place_id = request.form.get('id')
+        place_to_update = db.get_or_404(Cafe, place_id)
+        return render_template('edit.html', place=place_to_update)
 
 
 @app.route('/add', methods=["POST", "GET"])
