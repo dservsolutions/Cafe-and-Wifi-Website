@@ -52,15 +52,12 @@ def home():
 
 
 @app.route('/places')
-def places_registered():
-    query = db.session.execute(db.select(Cafe.name))
+def view_all():
+    query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
-    return render_template('places_registered.html', places=result)
+    return render_template('all_places.html', places=result)
 
-@app.route('/check')
-def check():
-    return render_template("check.html")
-    
+
 
 @app.route('/add', methods=["POST", "GET"])
 def add():

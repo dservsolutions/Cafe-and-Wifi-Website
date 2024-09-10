@@ -24,7 +24,7 @@
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
                 <li class="nav__item">
-                    <a href="{{ url_for('home') }}" class="nav__link">
+                    <a href="#" class="nav__link">
                         <i class="ri-arrow-right-up-line"></i>
                         <span>Home</span>
                     </a>
@@ -71,64 +71,37 @@
       </header>
 
       <!--==================== MAIN ====================-->
-<!--      HERO-->
-      <div class="hero">
-          <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
-              <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                  <h1 class="display-4 fw-bold lh-1 text-body-emphasis">Cafe&Wifi Places</h1>
-                  <p class="lead">The site where you'll find your favorite place for work remotely and enjoy a delicious coffe.</p>
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-<!--                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Primary</button>-->
-                      <button type="button" class="btn btn-outline-secondary btn-lg px-4">Learn more</button>
-                  </div>
-              </div>
-              <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-                  <img class="rounded-lg-3" src="./static/background.jpg" alt="" width="720">
-              </div>
-          </div>
-      </div>
-
-<!--      End Hero-->
-
-<!--      Top Places-->
-      <div class="top_places">
-      <div class="row mb-2">
-          <div class="col-md-6">
-              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                  <div class="col p-4 d-flex flex-column position-static">
-                      <strong class="d-inline-block mb-2 text-primary-emphasis">Best of the month:</strong>
-                      <h3 class="mb-0">Featured post</h3>
-                      <div class="mb-1 text-body-secondary">Nov 12</div>
-                      <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-            Continue reading<svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-                      </a>
-                  </div>
-                  <div class="col-auto d-none d-lg-block">
-                      <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-6">
-              <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                  <div class="col p-4 d-flex flex-column position-static">
-                      <strong class="d-inline-block mb-2 text-success-emphasis">Best of the week:</strong>
-                      <h3 class="mb-0">Post title</h3>
-                      <div class="mb-1 text-body-secondary">Nov 11</div>
-                      <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="icon-link gap-1 icon-link-hover stretched-link">
-            Continue reading
-                          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-                      </a>
-                  </div>
-                  <div class="col-auto d-none d-lg-block">
-                      <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                  </div>
-              </div>
-          </div>
-      </div>
-      </div>
-<!--      End Top Places-->
+      <div class="all">
+          <div class="data_table">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                      <th scope="col">id</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">Coffe Price</th>
+                      <th scope="col">Tools</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for place in places %}
+                  <tr>
+                      <th scope="row">{{ place.id }}</th>
+                      <td>{{ place.name }}</td>
+                      <td>{{ place.location }}</td>
+                      <td>{{ place.coffee_price }}</td>
+                      <td>
+                          <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                              <button class="btn btn-primary me-md-2" type="button">Edit</button>
+                              <button class="btn btn-danger me-md-2" type="button">Delete</button>
+                          </div>
+                      </td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!--      Footer-->
       <div class="foo">
