@@ -40,13 +40,13 @@ with app.app_context():
 def index_card():
     query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
-    cards = random.choice(result)
-    print(type(cards))
+    items = [ data for data in result]
+    print(items[0].name)
 
 @app.route('/')
 def home():
-    data = index_card()
-    return render_template('index.html', data=data)
+    name = index_card()
+    return render_template('index.html', name = name)
 
 
 @app.route('/all_places')
