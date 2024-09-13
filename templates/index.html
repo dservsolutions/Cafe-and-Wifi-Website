@@ -19,7 +19,7 @@
       <!--==================== HEADER ====================-->
       <header class="header" id="header">
           <nav class="nav container">
-        <a href="#" class="nav__logo">C&W</a>
+        <a href="{{ url_for('home') }}" class="nav__logo">C&W</a>
 
         <div class="nav__menu" id="nav-menu">
             <ul class="nav__list">
@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav__item">
-                    <a href="#" class="nav__link">
+                    <a href="{{ url_for('add') }}" class="nav__link">
                         <i class="ri-arrow-right-up-line"></i>
                         <span>Add Place</span>
                     </a>

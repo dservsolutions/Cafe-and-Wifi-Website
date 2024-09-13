@@ -1,14 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>C&W Places</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat Alternates", sans-serif;
+        }
+
+        body{
+            display: flex;
+            min-height: 100hv;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #FFF8E8, #E9EFEC);
+            margin-top: 150px;
+        }
+
+        .container{
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 25px 30px;
+            border-radius: 5px;
+        }
+
+        .container .title{
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .container .title::before{
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            background: linear-gradient(135deg, #FFF8E8, #E9EFEC);
+        }
+
+        .container form .cafe_details{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px 0 12px 0;
+        }
+
+        form .cafe_details .input-box{
+            margin-bottom: 15px;
+            width: calc(100% / 2 - 20px);
+        }
+
+        .cafe_details .input-box .details{
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .cafe_details .input-box input{
+            height: 45px;
+            width: 100%;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding-left: 15px;
+            font-size: 16px;
+            border-bottom-width: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .cafe_details .input-box input:focus,
+        .cafe_details .input-box input:valid{
+            border-color: #E9EFEC;
+        }
+
+        form check-box{
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        form .button{
+            height: 45px;
+            margin: 45px 0;
+        }
+
+        form .button input{
+            height: 100%;
+            width: 100%;
+            outline-color: none;
+            color: #fff;
+            border: none;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #E9EFEC, #6C4E31);
+        }
+        form .button input:hover{
+            background: linear-gradient(-135deg, #E9EFEC, #6C4E31);
+        }
+    </style>
 </head>
 <body>
-<form action="" method="POST">
-  <p>Name:</p>
-  <input type="text" name="name" placeholder="{{ place.name }}">
-  <button type="submit" >Save</button>
-</form>
+<div class="container">
+    <div class="title">Edit Form</div>
+    <form class="#" action="#" method="POST" >
+        <div class="cafe_details">
+            <div class="input-box">
+                <span class="details">Name</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="input-box">
+                <span class="details">Map URL</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="input-box">
+                <span class="details">Img URL</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="input-box">
+                <span class="details">Location</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="input-box">
+                <span class="details">Seats</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="input-box">
+                <span class="details">Name</span>
+                <input type="text" placeholder="" />
+            </div>
+
+            <div class="check-box">
+                <input type="checkbox" id="has_toilet" name="has_toilet"/>
+                <label for="has_toilet">Has Toilet?</label>
+            </div>
+
+            <div class="check-box">
+                <input type="checkbox" id="has_wifi" name="has_wifi"/>
+                <label for="has_wifi">Has Wifi?</label>
+            </div>
+
+            <div class="check-box">
+                <input type="checkbox" id="has_sockets" name="has_sockets"/>
+                <label for="has_sockets">Has Sockets?</label>
+            </div>
+
+            <div class="check-box">
+                <input type="checkbox" id="can_take_calls" name="can_take_calls"/>
+                <label for="can_take_calls">Can Take Calls?</label>
+            </div>
+        </div>
+          <div class="button">
+                <input type="submit"  value="Edit">
+          </div>
+    </form>
+</div>
 </body>
 </html>

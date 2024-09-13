@@ -37,18 +37,19 @@ class Cafe(db.Model):
 with app.app_context():
     db.create_all()
 
-# def get_data():
-#     while request.method == "POST":
-#         data =  request.form
-#         return data
-#
+def index_card():
+    query = db.session.execute(db.select(Cafe))
+    result = query.scalars().all()
+    cards = random.choice(result)
+    print(type(cards))
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    data = index_card()
+    return render_template('index.html', data=data)
 
 
-@app.route('/places')
+@app.route('/all_places')
 def view_all():
     query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
@@ -56,15 +57,15 @@ def view_all():
 
 @app.route('/edit/', methods=["POST", "GET"])
 def edit_places():
-    if request.method == 'POST':
-        place_id = request.form.get('id')
-        place_to_update = db.get_or_404(Cafe, place_id)
-        return render_template('edit.html', place=place_to_update)
+    # if request.method == 'POST':
+    #     place_id = request.form.get('id')
+    #     place_to_update = db.get_or_404(Cafe, place_id)
+        return render_template('edit.html')
 
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
-    return render_template('check.html')
+    return render_template('add.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
