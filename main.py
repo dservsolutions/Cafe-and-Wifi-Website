@@ -67,16 +67,17 @@ def edit_places():
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
-    if request.method == "POST":
-        data = request.form
-        if data['toilet'] == "None":
-            has_toilet = 0
-        elif data['wifi'] == "None":
-            has_wifi = 0
-        else:
-            has_toilet = 1
-            has_wifi = 1
-            print(f"{has_toilet},{has_wifi}")
+    try:
+        if request.method == "POST":
+            data = request.form
+            has_toilet = data['toilet']
+            while has_toilet != "None":
+                has_toilet = 1
+                break
+            print(has_toilet)
+    except:
+        raise Exception("Error")
+
 
         # name = request.form['name']
         # map_url = request.form['map_url']
@@ -104,8 +105,6 @@ def add():
         # )
         # db.session.add(new_place)
         # db.session.commit()
-
-
         return redirect(url_for('home'))
     return render_template('add.html')
 
