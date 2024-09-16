@@ -1,7 +1,6 @@
-import random
-from crypt import methods
+import json
 
-from flask import render_template, Flask, request, flash, url_for
+from flask import render_template, Flask, request, flash, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean, result_tuple, except_
@@ -27,11 +26,12 @@ class Cafe(db.Model):
     img_url: Mapped[str] = mapped_column(String(500), nullable=False)
     location: Mapped[str] = mapped_column(String(250), nullable=False)
     seats: Mapped[str] = mapped_column(String(250), nullable=False)
+    coffee_price: Mapped[str] = mapped_column(String(250), nullable=True)
     has_toilet: Mapped[bool] = mapped_column(Boolean, nullable=False)
     has_wifi: Mapped[bool] = mapped_column(Boolean, nullable=False)
     has_sockets: Mapped[bool] = mapped_column(Boolean, nullable=False)
     can_take_calls: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    coffee_price: Mapped[str] = mapped_column(String(250), nullable=True)
+
 
 
 with app.app_context():
@@ -41,12 +41,14 @@ def index_card():
     query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
     items = [ data for data in result]
-    print(items[0].name)
+    return items
 
 @app.route('/')
 def home():
-    name = index_card()
-    return render_template('index.html', name = name)
+    items = index_card()
+    item_1 = items[0]
+    item_2 = items[1]
+    return render_template('index.html', first_card = item_1, second_card = item_2)
 
 
 @app.route('/all_places')
@@ -65,6 +67,46 @@ def edit_places():
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
+    if request.method == "POST":
+        data = request.form
+        if data['toilet'] == "None":
+            has_toilet = 0
+        elif data['wifi'] == "None":
+            has_wifi = 0
+        else:
+            has_toilet = 1
+            has_wifi = 1
+            print(f"{has_toilet},{has_wifi}")
+
+        # name = request.form['name']
+        # map_url = request.form['map_url']
+        # img_url = request.form['img_url']
+        # location = request.form['location']
+        # seats = request.form['seats']
+        # coffee_price = request.form['coffe_price']
+
+
+        # has_wifi = request.form['has_wifi']
+        # has_sockets = request.form['has_sockets']
+        # can_take_calls = request.form['can_take_calls']
+
+        # new_place = Cafe(
+        #     name = request.form['name'],
+        #     map_url = request.form['map_url'],
+        #     img_url = request.form['img_url'],
+        #     location = request.form['location'],
+        #     seats = request.form['seats'],
+        #     coffee_price = request.form['coffe_price'],
+        #     has_toilet = request.form['checked'],
+        #         has_wifi = request.form['checked'],
+        #     has_sockets = request.form['check'],
+        #     can_take_calls = request.form['can_take_calls']
+        # )
+        # db.session.add(new_place)
+        # db.session.commit()
+
+
+        return redirect(url_for('home'))
     return render_template('add.html')
 
 if __name__ == "__main__":
