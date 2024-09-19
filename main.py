@@ -98,33 +98,6 @@ def add():
         return redirect(url_for('home'))
     return render_template('add.html')
 
-        # name = request.form['name']
-        # map_url = request.form['map_url']
-        # img_url = request.form['img_url']
-        # location = request.form['location']
-        # seats = request.form['seats']
-        # coffee_price = request.form['coffe_price']
-
-
-        # has_wifi = request.form['has_wifi']
-        # has_sockets = request.form['has_sockets']
-        # can_take_calls = request.form['can_take_calls']
-
-        # new_place = Cafe(
-        #     name = request.form['name'],
-        #     map_url = request.form['map_url'],
-        #     img_url = request.form['img_url'],
-        #     location = request.form['location'],
-        #     seats = request.form['seats'],
-        #     coffee_price = request.form['coffe_price'],
-        #     has_toilet = request.form['checked'],
-        #         has_wifi = request.form['checked'],
-        #     has_sockets = request.form['check'],
-        #     can_take_calls = request.form['can_take_calls']
-        # )
-        # db.session.add(new_place)
-    #     # db.session.commit()
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
