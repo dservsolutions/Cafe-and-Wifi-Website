@@ -63,16 +63,6 @@ def edit_places():
     #     place_to_update = db.get_or_404(Cafe, place_id)
         return render_template('edit.html')
 
-def checkBox():
-    if request.method == "POST":
-        checked = 'toilet' in request.form
-        print(checked)
-        # if che:
-        #     checked = 1
-        # else:
-        #     checked = 0
-        #     print(checked)
-
 @app.route('/add', methods=["POST", "GET"])
 def add():
     if request.method == "POST":
