@@ -2,7 +2,7 @@ from flask import render_template, Flask, request, flash, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
-
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -67,30 +67,36 @@ def checkBox():
     if request.method == "POST":
         checked = 'toilet' in request.form
         print(checked)
+        # if che:
+        #     checked = 1
+        # else:
+        #     checked = 0
+        #     print(checked)
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
-    checkBox()
+    if request.method == "POST":
+        data = request.form
+        toilet = 'toilet' in request.form
+        wifi = 'wifi' in request.form
+        sockets = 'sockets' in request.form
+        calls = 'calls' in request.form
+        new_cafe = Cafe(
+            name=data.get('name'),
+            map_url=data.get('map_url'),
+            img_url=data.get('img_url'),
+            location=data.get('location'),
+            seats=data.get('seats'),
+            coffee_price=data.get('coffee_price'),
+            has_toilet = toilet,
+            has_wifi = wifi,
+            has_sockets = sockets,
+            can_take_calls = calls
+            )
+        db.session.add(new_cafe)
+        db.session.commit()
+        return redirect(url_for('home'))
     return render_template('add.html')
-     # return jsonify({'message': 'Checkbox value received', 'checked': is_checked})
-    # if request.method == "POST":
-    #     data = request.form
-    #     new_cafe = Cafe(
-    #         name=data.get('name'),
-    #         map_url=data.get('map_url'),
-    #         img_url=data.get('img_url'),
-    #         location=data.get('location'),
-    #         seats=data.get('seats'),
-    #         coffee_price=data.get('coffee_price'),
-    #         has_toilet = data.get('toilets'),
-    #         has_wifi = data.get('wifi'),
-    #         has_sockets = data.get('sockets'),
-    #         can_take_calls = data.get('calls')
-    #         )
-    #     print(new_cafe.has_toilet)
-        # db.session.add(new_cafe)
-        # db.session.commit()
-
 
         # name = request.form['name']
         # map_url = request.form['map_url']
