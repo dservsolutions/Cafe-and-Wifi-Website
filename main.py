@@ -1,10 +1,8 @@
-import json
-
 from flask import render_template, Flask, request, flash, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from sqlalchemy import Integer, String, Boolean, result_tuple, except_
-from werkzeug.utils import redirect
+from sqlalchemy import Integer, String, Boolean
+
 
 app = Flask(__name__)
 
@@ -12,7 +10,7 @@ app = Flask(__name__)
 class Base(DeclarativeBase):
     pass
 
-app.config['SECRET_KEY'] = "12345678"
+app.config['SECRET_KEY'] = "ZJ\x9e\xc74N\x8d\xe5\xe8\x05\xd2w\xab\xbe\\\xe2+\x01\xac\x9c\x94\xa7\xfbc"
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///cafes.db"
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
@@ -43,6 +41,7 @@ def index_card():
     items = [ data for data in result]
     return items
 
+
 @app.route('/')
 def home():
     items = index_card()
@@ -64,19 +63,33 @@ def edit_places():
     #     place_to_update = db.get_or_404(Cafe, place_id)
         return render_template('edit.html')
 
+def checkBox():
+    if request.method == "POST":
+        checked = 'toilet' in request.form
+        print(checked)
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
-    try:
-        if request.method == "POST":
-            data = request.form
-            has_toilet = data['toilet']
-            while has_toilet != "None":
-                has_toilet = 1
-                break
-            print(has_toilet)
-    except:
-        raise Exception("Error")
+    checkBox()
+    return render_template('add.html')
+     # return jsonify({'message': 'Checkbox value received', 'checked': is_checked})
+    # if request.method == "POST":
+    #     data = request.form
+    #     new_cafe = Cafe(
+    #         name=data.get('name'),
+    #         map_url=data.get('map_url'),
+    #         img_url=data.get('img_url'),
+    #         location=data.get('location'),
+    #         seats=data.get('seats'),
+    #         coffee_price=data.get('coffee_price'),
+    #         has_toilet = data.get('toilets'),
+    #         has_wifi = data.get('wifi'),
+    #         has_sockets = data.get('sockets'),
+    #         can_take_calls = data.get('calls')
+    #         )
+    #     print(new_cafe.has_toilet)
+        # db.session.add(new_cafe)
+        # db.session.commit()
 
 
         # name = request.form['name']
@@ -104,9 +117,8 @@ def add():
         #     can_take_calls = request.form['can_take_calls']
         # )
         # db.session.add(new_place)
-        # db.session.commit()
-        return redirect(url_for('home'))
-    return render_template('add.html')
+    #     # db.session.commit()
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

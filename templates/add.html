@@ -114,7 +114,7 @@
         <div class="cafe_details">
             <div class="input-box">
                 <span class="details">Name</span>
-                <input type="text" placeholder="" name="name" id="name"/>
+                <input type="text" placeholder="" name="name" id="name" required="required"/>
             </div>
 
             <div class="input-box">
@@ -139,27 +139,27 @@
 
             <div class="input-box">
                 <span class="details">Coffe Price</span>
-                <input type="text" placeholder="" name="coffe_price" id="coffee_price" />
+                <input type="text" placeholder="" name="coffee_price" id="coffee_price" />
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_toilet" name="toilet" />
+                <input type="checkbox" id="has_toilet" name="toilet" value="1" onclick="getCheckboxValue()" />
                 <label for="has_toilet">Has Toilet?</label>
+                <p id="result"></p>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_wifi" name="wifi" />
+                <input type="checkbox" id="has_wifi" name="checkbox" value="0" />
                 <label for="has_wifi">Has Wifi?</label>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_sockets" disabled />
+                <input type="checkbox" id="has_sockets" name="checkbox" value="0" />
                 <label for="has_sockets">Has Sockets?</label>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="can_take_calls" disabled/>
-
+                <input type="checkbox" id="can_take_calls" name="checkbox" value="0"/>
                 <label for="can_take_calls">Can Take Calls?</label>
             </div>
         </div>
@@ -168,5 +168,29 @@
           </div>
     </form>
 </div>
+<script>
+
+    function getCheckboxValue() {
+            var toilet = document.getElementById("has_toilet");
+            var result = toilet.checked; // true if checked, false if not
+            document.getElementById("result").innerText = result;
+
+            // Send the value to the backend
+            fetch('/checkbox_value',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ checked: result }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response from server:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    </script>
 </body>
 </html>
