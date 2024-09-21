@@ -1,8 +1,7 @@
-from flask import render_template, Flask, request, flash, url_for, jsonify
+from flask import render_template, Flask, request, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
-from werkzeug.utils import redirect
 
 app = Flask(__name__)
 
@@ -41,7 +40,6 @@ def index_card():
     items = [ data for data in result]
     return items
 
-
 @app.route('/')
 def home():
     items = index_card()
@@ -54,14 +52,9 @@ def home():
 def view_all():
     query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
-    return render_template('all_places.html', places=result)
+    return render_template('all_places.html', places=result, id=id )
 
-@app.route('/edit/', methods=["POST", "GET"])
-def edit_places():
-    # if request.method == 'POST':
-    #     place_id = request.form.get('id')
-    #     place_to_update = db.get_or_404(Cafe, place_id)
-        return render_template('edit.html')
+
 
 @app.route('/add', methods=["POST", "GET"])
 def add():
@@ -85,6 +78,7 @@ def add():
             )
         db.session.add(new_cafe)
         db.session.commit()
+        flash("Save Success")
         return redirect(url_for('home'))
     return render_template('add.html')
 
