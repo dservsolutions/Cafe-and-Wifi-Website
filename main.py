@@ -52,7 +52,7 @@ def home():
 def view_all():
     query = db.session.execute(db.select(Cafe))
     result = query.scalars().all()
-    return render_template('all_places.html', places=result, id=id )
+    return render_template('all_places.html', places=result )
 
 
 
