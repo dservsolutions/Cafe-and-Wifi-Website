@@ -38,7 +38,7 @@
                 </li>
 
                 <li class="nav__item">
-                    <a href="{{ url_for('view_all') }}" class="nav__link">
+                    <a href="{{ url_for('all_places') }}" class="nav__link">
                         <i class="ri-arrow-right-up-line"></i>
                         <span>View All</span>
                     </a>
@@ -72,12 +72,11 @@
 
       <!--==================== MAIN ====================-->
       <div class="all">
-          <form action="" method="POST">
               <table class="table table-striped">
                   <thead>
                   <tr>
-                      <th scope="col" id="id" >id</th>
-                      <th scope="col">Name</th>
+                      <th scope="col" id="id">id</th>
+                      <th scope="col" id="name">Name</th>
                       <th scope="col">Location</th>
                       <th scope="col">Coffe Price</th>
                       <th scope="col">Tools</th>
@@ -86,21 +85,20 @@
                   <tbody>
                   {% for place in places %}
                   <tr>
-                      <th scope="row">{{ place.id }}</th>
+                      <th scope="row" name="id">{{ place.id }}</th>
                       <td>{{ place.name }}</td>
                       <td>{{ place.location }}</td>
                       <td>{{ place.coffee_price }}</td>
                       <td>
                           <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                              <i class="ri-edit-box-line"><a href=""></a></i>
-                              <i class="ri-eraser-line"><a href=""></a> </i>
+                              <a href="{{ url_for('edit', id=place.id) }}">Edit</a>
+                              <a href="{{ url_for('delete') }}">Delete</a>
                           </div>
                       </td>
                   </tr>
                   {% endfor %}
             </tbody>
         </table>
-    </form>
 </div>
 
 <!--      Footer-->

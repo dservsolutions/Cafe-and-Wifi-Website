@@ -110,40 +110,41 @@
 <body>
 <div class="container">
     <div class="title">Edit Form</div>
-    <form class="#" action="#" method="POST" >
+    <form class="#" action="{{ url_for('edit') }}" method="POST" >
+        <input type="text" hidden="hidden" value="{{ cafe.id }}">
         <div class="cafe_details">
             <div class="input-box">
                 <span class="details">Name</span>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" value="{{ cafe.name }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Map URL</span>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" value="{{ cafe.map_url }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Img URL</span>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" value="{{ cafe.img_url }}" />
             </div>
 
             <div class="input-box">
                 <span class="details">Location</span>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" value="{{ cafe.location }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Seats</span>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" value="{{ cafe.seats }}"/>
             </div>
 
             <div class="input-box">
-                <span class="details">Name</span>
-                <input type="text" placeholder="" />
+                <span class="details">Price</span>
+                <input type="text" placeholder="" value="{{ cafe.coffee_price }}" />
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_toilet" name="has_toilet"/>
+                <input type="checkbox" id="has_toilet" name="has_toilet" />
                 <label for="has_toilet">Has Toilet?</label>
             </div>
 
