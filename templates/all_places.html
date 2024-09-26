@@ -85,14 +85,14 @@
                   <tbody>
                   {% for place in places %}
                   <tr>
-                      <th scope="row" name="id">{{ place.id }}</th>
+                      <th scope="row" >{{ place.id }}</th>
                       <td>{{ place.name }}</td>
                       <td>{{ place.location }}</td>
                       <td>{{ place.coffee_price }}</td>
                       <td>
                           <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                               <a href="{{ url_for('edit', id=place.id) }}">Edit</a>
-                              <a href="{{ url_for('delete') }}">Delete</a>
+                              <a href="{{ url_for('delete', id=place.id) }}">Delete</a>
                           </div>
                       </td>
                   </tr>

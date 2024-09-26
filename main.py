@@ -107,7 +107,9 @@ def edit():
 @app.route('/delete')
 def delete():
     cafe_id = request.args.get('id')
-    print(cafe_id)
+    cafe_to_delete = db.get_or_404(Cafe, cafe_id)
+    db.session.delete(cafe_to_delete)
+    db.session.commit()
     return redirect(url_for('all_places'))
 
 
