@@ -102,7 +102,7 @@ def edit():
         return redirect(url_for('all_places'))
     cafe_id = request.args.get('id')
     cafe_selected = db.get_or_404(Cafe, cafe_id)
-    return render_template('edit.html' ,cafe=cafe_selected)
+    return render_template('all_places.html' ,cafe=cafe_selected)
 
 @app.route('/delete')
 def delete():
