@@ -111,60 +111,60 @@
 <div class="container">
     <div class="title">Edit Form</div>
     <form class="#" action="{{ url_for('edit') }}" method="POST" >
-        <input type="text" hidden="hidden" value="{{ cafe.id }}">
+        <input type="text" hidden="hidden" name="id" value="{{ cafe.id }}">
         <div class="cafe_details">
             <div class="input-box">
                 <span class="details">Name</span>
-                <input type="text" placeholder="" value="{{ cafe.name }}"/>
+                <input type="text" name="name" placeholder="" value="{{ cafe.name }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Map URL</span>
-                <input type="text" placeholder="" value="{{ cafe.map_url }}"/>
+                <input type="text" name="map_url" placeholder="" value="{{ cafe.map_url }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Img URL</span>
-                <input type="text" placeholder="" value="{{ cafe.img_url }}" />
+                <input type="text" name="img_url" placeholder="" value="{{ cafe.img_url }}" />
             </div>
 
             <div class="input-box">
                 <span class="details">Location</span>
-                <input type="text" placeholder="" value="{{ cafe.location }}"/>
+                <input type="text" name="location" placeholder="" value="{{ cafe.location }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Seats</span>
-                <input type="text" placeholder="" value="{{ cafe.seats }}"/>
+                <input type="text" name="seats" placeholder="" value="{{ cafe.seats }}"/>
             </div>
 
             <div class="input-box">
                 <span class="details">Price</span>
-                <input type="text" placeholder="" value="{{ cafe.coffee_price }}" />
+                <input type="text" name="coffee_price" placeholder="" value="{{ cafe.coffee_price }}" />
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_toilet" name="has_toilet" />
+                <input type="checkbox" id="has_toilet" name="has_toilet" value="{{ cafe.has_toilet }}"/>
                 <label for="has_toilet">Has Toilet?</label>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_wifi" name="has_wifi"/>
+                <input type="checkbox" id="has_wifi" name="has_wifi" value="{{ cafe.has_wifi }}"/>
                 <label for="has_wifi">Has Wifi?</label>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="has_sockets" name="has_sockets"/>
+                <input type="checkbox" id="has_sockets" name="has_sockets" value="{{ cafe.has_sockets }}"/>
                 <label for="has_sockets">Has Sockets?</label>
             </div>
 
             <div class="check-box">
-                <input type="checkbox" id="can_take_calls" name="can_take_calls"/>
+                <input type="checkbox" id="can_take_calls" name="can_take_calls" value="{{ cafe.can_take_calls }}"/>
                 <label for="can_take_calls">Can Take Calls?</label>
             </div>
         </div>
           <div class="button">
-                <input type="submit"  value="Edit">
+                <input type="submit"  value="Update">
           </div>
     </form>
 </div>

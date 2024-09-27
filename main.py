@@ -82,7 +82,7 @@ def add():
         db.session.add(new_cafe)
         db.session.commit()
         flash("Save Success")
-        return redirect(url_for('home'))
+        return redirect(url_for('all_places'))
     return render_template('add.html')
 
 
@@ -95,14 +95,27 @@ def all_places():
 @app.route('/edit', methods=["POST", "GET"])
 def edit():
     if request.method == "POST":
-        # Update Record
-        cafe_id = request.args.get('id')
-        to_update = db.get_or_404(Cafe, cafe_id)
+        cafe_id = request.form['id']
+        has_toilet = 'has_toilet' in request.form
+        has_wifi = 'has_wifi' in request.form
+        has_sockets = 'has_sockets' in request.form
+        can_take_calls = 'can_take_calls' in request.form
+        cafe_to_update = db.get_or_404(Cafe, cafe_id)
+        cafe_to_update.name = request.form['name']
+        cafe_to_update.map_url = request.form['map_url']
+        cafe_to_update.img_url = request.form['img_url']
+        cafe_to_update.location = request.form['location']
+        cafe_to_update.seats = request.form['seats']
+        cafe_to_update.coffee_price = request.form['coffee_price']
+        cafe_to_update.has_toilet = has_toilet
+        cafe_to_update.has_wifi = has_wifi
+        cafe_to_update.has_sockets = has_sockets
+        cafe_to_update.can_take_calls = can_take_calls
         db.session.commit()
         return redirect(url_for('all_places'))
     cafe_id = request.args.get('id')
     cafe_selected = db.get_or_404(Cafe, cafe_id)
-    return render_template('all_places.html' ,cafe=cafe_selected)
+    return render_template('edit.html' ,cafe=cafe_selected)
 
 @app.route('/delete')
 def delete():
